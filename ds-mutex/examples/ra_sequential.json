@@ -1,0 +1,19 @@
+{
+  "type": "MutexDemo",
+  "algorithm": "RA",
+  "meta": {
+    "description": "Ricart–Agrawala – sequential requests by P1 then P2.",
+    "expected": [
+      "P1 enters CS then releases; afterwards P2 enters CS.",
+      "No starvation; reply queue drains on release."
+    ]
+  },
+  "processes": ["P1", "P2", "P3"],
+  "network": { "delayMs": [15, 40] },
+  "events": [
+    { "t": 0,  "op": "requestCS", "on": "P1" },
+    { "t": 30, "op": "releaseCS", "on": "P1" },
+    { "t": 40, "op": "requestCS", "on": "P2" },
+    { "t": 70, "op": "releaseCS", "on": "P2" }
+  ]
+}

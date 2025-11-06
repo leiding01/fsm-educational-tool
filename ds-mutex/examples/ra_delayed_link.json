@@ -1,0 +1,24 @@
+{
+  "type": "MutexDemo",
+  "algorithm": "RA",
+  "meta": {
+    "description": "Ricart–Agrawala – artificial delay on link P3→P1.",
+    "expected": [
+      "At most one process in CS at any time.",
+      "P1's entry may be delayed by P3's late REPLY, but correctness holds."
+    ]
+  },
+  "processes": ["P1", "P2", "P3"],
+  "network": {
+    "delayMs": [20, 40],
+    "linkDelays": [
+      { "from": "P3", "to": "P1", "delayMs": 150 }
+    ]
+  },
+  "events": [
+    { "t": 0,  "op": "requestCS", "on": "P1" },
+    { "t": 8,  "op": "requestCS", "on": "P2" },
+    { "t": 60, "op": "releaseCS", "on": "P1" },
+    { "t": 85, "op": "releaseCS", "on": "P2" }
+  ]
+}

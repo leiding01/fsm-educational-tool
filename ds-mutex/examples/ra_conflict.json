@@ -1,0 +1,19 @@
+{
+  "type": "MutexDemo",
+  "algorithm": "RA",
+  "meta": {
+    "description": "Ricart–Agrawala – near-simultaneous requests from P1 and P2.",
+    "expected": [
+      "Exactly one process in CS at any time.",
+      "If timestamps tie, the lower process ID wins the tie-break first."
+    ]
+  },
+  "processes": ["P1", "P2", "P3"],
+  "network": { "delayMs": [20, 60] },
+  "events": [
+    { "t": 0,  "op": "requestCS", "on": "P1" },
+    { "t": 5,  "op": "requestCS", "on": "P2" },
+    { "t": 40, "op": "releaseCS", "on": "P1" },
+    { "t": 50, "op": "releaseCS", "on": "P2" }
+  ]
+}

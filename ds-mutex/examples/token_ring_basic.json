@@ -1,0 +1,22 @@
+{
+  "type": "MutexDemo",
+  "algorithm": "TokenRing",
+  "meta": {
+    "description": "Token-ring – pass token around the ring; P1 then P2 enter CS.",
+    "expected": [
+      "Only the token holder may enter CS.",
+      "After P1 releases, token is passed to P2 which can then enter CS."
+    ]
+  },
+  "processes": ["P1", "P2", "P3", "P4"],
+  "ring": ["P1", "P2", "P3", "P4"],
+  "events": [
+    { "t": 0,  "op": "holdToken",  "on": "P1" },
+    { "t": 10, "op": "requestCS",  "on": "P1" },
+    { "t": 30, "op": "releaseCS",  "on": "P1" },
+    { "t": 35, "op": "passToken",  "from": "P1", "to": "P2" },
+    { "t": 45, "op": "requestCS",  "on": "P2" },
+    { "t": 70, "op": "releaseCS",  "on": "P2" }
+  ],
+  "network": { "delayMs": [10, 30] }
+}

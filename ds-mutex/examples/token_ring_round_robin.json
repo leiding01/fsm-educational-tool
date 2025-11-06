@@ -1,0 +1,25 @@
+{
+  "type": "MutexDemo",
+  "algorithm": "TokenRing",
+  "meta": {
+    "description": "Token-ring – round robin: token visits P1→P2→P3→P4.",
+    "expected": [
+      "Token circulates in order; mutual exclusion preserved throughout."
+    ]
+  },
+  "processes": ["P1", "P2", "P3", "P4"],
+  "ring": ["P1", "P2", "P3", "P4"],
+  "events": [
+    { "t": 0,  "op": "holdToken", "on": "P1" },
+    { "t": 5,  "op": "requestCS", "on": "P1" },
+    { "t": 20, "op": "releaseCS", "on": "P1" },
+    { "t": 25, "op": "passToken", "from": "P1", "to": "P2" },
+    { "t": 30, "op": "requestCS", "on": "P2" },
+    { "t": 45, "op": "releaseCS", "on": "P2" },
+    { "t": 50, "op": "passToken", "from": "P2", "to": "P3" },
+    { "t": 55, "op": "requestCS", "on": "P3" },
+    { "t": 70, "op": "releaseCS", "on": "P3" },
+    { "t": 75, "op": "passToken", "from": "P3", "to": "P4" }
+  ],
+  "network": { "delayMs": [10, 25] }
+}
